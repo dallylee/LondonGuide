@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>London City Guide - Lara & Dora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        .card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(236, 72, 153, 0.15);
+            border-color: rgb(236, 72, 153);
+        }
+        
+        .gradient-pink {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+        
+        .gradient-pink-light {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="gradient-pink text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <button onclick="showPage('home')" class="font-bold text-lg flex items-center gap-2">
+                🏛️ London Guide
+            </button>
+            <button onclick="toggleMenu()" class="text-2xl" id="menuBtn">☰</button>
+        </div>
+        <div id="menu" class="hidden mt-4 space-y-2">
+            <button onclick="showPage('home')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">🏠 Home</button>
+            <button onclick="showPage('glance')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">⏱️ At a Glance</button>
+            <button onclick="showPage('day1')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">👑 Day 1</button>
+            <button onclick="showPage('day2')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">🏰 Day 2</button>
+            <button onclick="showPage('day3')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">🛍️ Day 3</button>
+            <button onclick="showPage('dining')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">🍽️ Gluten-Free Dining</button>
+            <button onclick="showPage('safety')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">🛡️ Safety Tips</button>
+            <button onclick="showPage('transport')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">🚇 Transport</button>
+            <button onclick="showPage('appendix')" class="block w-full text-left px-4 py-2 hover:bg-pink-600 rounded transition">📋 Appendices</button>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto p-4 pb-20">
+        
+        <!-- HOME PAGE -->
+        <div id="home" class="page active space-y-6">
+            <div class="gradient-pink text-white p-8 rounded-lg text-center shadow-lg">
+                <h1 class="text-3xl font-bold mb-2">London City Guide</h1>
+                <p class="text-lg opacity-90">Lara & Dora</p>
+                <p class="text-sm opacity-80">October 15-18, 2025</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onclick="showPage('glance')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">⏱️</div>
+                    <h3 class="text-xl font-bold mb-1">At a Glance</h3>
+                    <p class="text-gray-600 text-sm">Quick overview & essentials</p>
+                </button>
+
+                <button onclick="showPage('day1')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">👑</div>
+                    <h3 class="text-xl font-bold mb-1">Day 1</h3>
+                    <p class="text-gray-600 text-sm">Royal London & West End</p>
+                </button>
+
+                <button onclick="showPage('day2')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">🏰</div>
+                    <h3 class="text-xl font-bold mb-1">Day 2</h3>
+                    <p class="text-gray-600 text-sm">Tower & Thames Walk</p>
+                </button>
+
+                <button onclick="showPage('day3')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">🛍️</div>
+                    <h3 class="text-xl font-bold mb-1">Day 3</h3>
+                    <p class="text-gray-600 text-sm">Museums & Shopping</p>
+                </button>
+
+                <button onclick="showPage('dining')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">🍽️</div>
+                    <h3 class="text-xl font-bold mb-1">Gluten-Free Dining</h3>
+                    <p class="text-gray-600 text-sm">Safe eating spots</p>
+                </button>
+
+                <button onclick="showPage('safety')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">🛡️</div>
+                    <h3 class="text-xl font-bold mb-1">Safety Tips</h3>
+                    <p class="text-gray-600 text-sm">Stay safe & smart</p>
+                </button>
+
+                <button onclick="showPage('transport')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">🚇</div>
+                    <h3 class="text-xl font-bold mb-1">Transport Guide</h3>
+                    <p class="text-gray-600 text-sm">Tube & bus routes</p>
+                </button>
+
+                <button onclick="showPage('appendix')" class="card bg-white p-6 rounded-lg shadow hover:shadow-xl text-left border-2 border-transparent">
+                    <div class="text-4xl mb-3">📋</div>
+                    <h3 class="text-xl font-bold mb-1">Appendices</h3>
+                    <p class="text-gray-600 text-sm">Maps & checklists</p>
+                </button>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>⚡ Quick Tip:</strong> Daily transport cap is £8.90 for unlimited travel in zones 1-2!</p>
+            </div>
+        </div>
+
+        <!-- AT A GLANCE PAGE -->
+        <div id="glance" class="page space-y-6">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <div class="gradient-pink-light p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-bold mb-4 text-pink-900">⏱️ At a Glance</h2>
+                
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded">
+                        <h3 class="font-bold text-lg mb-2">🌤️ Weather (Mid-October)</h3>
+                        <ul class="list-disc ml-5 space-y-1 text-gray-700 text-sm">
+                            <li>Average highs ~16°C, lows ~10°C</li>
+                            <li>Expect about 10 rainy days in October</li>
+                            <li>Pack: waterproof jacket, umbrella, layers, comfortable shoes</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded">
+                        <h3 class="font-bold text-lg mb-2">⭐ Top 3 Must-Do Experiences</h3>
+                        <ol class="list-decimal ml-5 space-y-1 text-gray-700 text-sm">
+                            <li><strong>Big Ben & Westminster:</strong> Classic London vista from Westminster Bridge (free)</li>
+                            <li><strong>Tower Bridge & Tower of London:</strong> Walk across the bridge, photograph the medieval tower</li>
+                            <li><strong>West End Evenings:</strong> Piccadilly Circus and Leicester Square after dark</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-4 rounded">
+                        <h3 class="font-bold text-lg mb-2">💰 Top 3 Money-Savers</h3>
+                        <ol class="list-decimal ml-5 space-y-1 text-gray-700 text-sm">
+                            <li><strong>Contactless Daily Cap:</strong> £8.90 in zones 1-2 (unlimited rides)</li>
+                            <li><strong>Free Museums:</strong> British Museum, Natural History, National Gallery</li>
+                            <li><strong>Meal Deals:</strong> Supermarket sandwiches ~£5, tap water free</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-4 rounded">
+                        <h3 class="font-bold mb-2">🏨 Your Hotel</h3>
+                        <p class="mb-2">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Zedwell+Piccadilly+Circus+Great+Windmill+Street+London" 
+                               target="_blank" class="text-pink-600 hover:text-pink-700 underline font-medium">
+                                Zedwell Piccadilly Circus 📍
+                            </a>
+                        </p>
+                        <p class="text-sm text-gray-600">Perfect central location - 1 min from Piccadilly Circus station!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 1 PAGE -->
+        <div id="day1" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">👑 Day 1 - West End Welcome & Royal London</h2>
+            
+            <div class="gradient-pink-light p-4 rounded-lg shadow">
+                <p class="text-sm font-semibold text-pink-900">09:00 - 21:00 • Royal landmarks & West End vibes</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">☀️ Morning (09:00-12:00)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>09:00 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Trafalgar+Square+London+WC2N+5DN" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Trafalgar Square 📍
+                        </a>
+                        & National Gallery
+                        <p class="text-gray-600 ml-5 mt-1">Walk 8 min from hotel via Haymarket. Free art museum with Van Gogh's Sunflowers</p>
+                    </li>
+                    <li>
+                        <strong>10:30 - </strong>Stroll The Mall to 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Buckingham+Palace+The+Mall+SW1A+1AA+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Buckingham Palace 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Changing of Guard at 11:00 (Mon/Wed/Fri). Feed the pelicans in St James's Park!</p>
+                    </li>
+                    <li>
+                        <strong>12:00 - </strong>Lunch at 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Covent+Garden+Market+WC2E+8RF+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Covent Garden 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Take Tube from Green Park (3 stops). Street performers & food stalls. Try Pho (95% GF menu)!</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">☀️ Afternoon (13:00-17:30)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>13:00 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Leicester+Square+London+WC2H+7DE" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Leicester Square 📍
+                        </a>
+                        & Chinatown
+                        <p class="text-gray-600 ml-5 mt-1">5 min walk. See M&M's World, walk through Chinatown gates. Try bubble tea!</p>
+                    </li>
+                    <li>
+                        <strong>14:30 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Regent+Street+London+W1B" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Regent Street 📍
+                        </a>
+                        to Carnaby Street
+                        <p class="text-gray-600 ml-5 mt-1">Pop into Hamleys Toy Store (free demos!). Trendy shops on Carnaby</p>
+                    </li>
+                    <li>
+                        <strong>15:30 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fortnum+Mason+181+Piccadilly+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Fortnum & Mason 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">The Queen's grocer! Browse gorgeous food halls (free). Ice cream parlour has GF options</p>
+                    </li>
+                    <li>
+                        <strong>16:30 - </strong>Double-Decker Bus Ride (Route 9)
+                        <p class="text-gray-600 ml-5 mt-1">From Piccadilly to Royal Albert Hall via Hyde Park. Sit upstairs left! £1.75</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🌙 Evening (18:00-21:00)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>18:30 - </strong>Dinner in Soho
+                        <p class="text-gray-600 ml-5 mt-1">
+                            Try 
+                            <a href="https://www.google.com/maps/search/?api=1&query=Honest+Burgers+4A+Meard+Street+Soho+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                                Honest Burgers 📍
+                            </a>
+                            (GF buns & chips!) or Côte Brasserie (French, GF menu). ~£12-15
+                        </p>
+                    </li>
+                    <li>
+                        <strong>20:00 - </strong>Piccadilly Lights - neon signs in full glow!
+                        <p class="text-gray-600 ml-5 mt-1">Perfect selfie spot by Eros statue. Keep phone secure - back against building!</p>
+                    </li>
+                    <li>
+                        <strong>20:30 - </strong>Dessert at 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Grom+Gelato+16-18+Piccadilly+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Grom Gelato 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">100% gluten-free Italian gelato! All cones are GF. 4 min from hotel. ~£4</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>⚠️ Safety Note:</strong> In crowded spots, keep bags zipped and in front. Watch for pickpockets working in teams at Covent Garden and Leicester Square!</p>
+            </div>
+        </div>
+
+        <!-- DAY 2 PAGE -->
+        <div id="day2" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">🏰 Day 2 - City Sights, Tower & Thames</h2>
+            
+            <div class="gradient-pink-light p-4 rounded-lg shadow">
+                <p class="text-sm font-semibold text-pink-900">09:00 - 21:00 • Historic City & riverside walk</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">☀️ Morning (09:00-12:30)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>09:00 - </strong>Bus 15 to 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Tower+of+London+Tower+Hill+EC3N+4AB+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Tower of London 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">From Trafalgar Square, 30-min scenic ride past St Paul's Cathedral dome. Sit upstairs RIGHT!</p>
+                    </li>
+                    <li>
+                        <strong>09:45 - </strong>Tower of London
+                        <p class="text-gray-600 ml-5 mt-1">£36.40 adult / ~£25 for 16-17 (buy online to save). See Crown Jewels & battlements (2 hrs), or just photo the exterior for free</p>
+                    </li>
+                    <li>
+                        <strong>11:30 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Tower+Bridge+London+SE1+2UP" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Tower Bridge Walk 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Free to cross on foot! Panoramic Thames views. Take photos from south end</p>
+                    </li>
+                    <li>
+                        <strong>12:00 - </strong>Lunch at 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Borough+Market+8+Southwark+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Borough Market 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Amazing food market! Try <strong>Free From Bakehouse</strong> (100% GF stall - Bakewell tarts!) or <strong>La Pepia</strong> (GF Venezuelan arepas). ~£8-12</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">☀️ Afternoon (13:00-17:30)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>13:00 - </strong>South Bank Stroll (Thames Path)
+                        <p class="text-gray-600 ml-5 mt-1">Walk west past Shakespeare's Globe (peek inside gift shop), Tate Modern (free!), and Millennium Bridge (amazing St Paul's view from mid-bridge!)</p>
+                    </li>
+                    <li>
+                        <strong>14:30 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=London+Eye+Westminster+Bridge+Road+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            London Eye 📍
+                        </a>
+                        & Westminster area
+                        <p class="text-gray-600 ml-5 mt-1">Optional ride (£32 online, 30-min rotation) or just enjoy the area. Street performers and food stalls!</p>
+                    </li>
+                    <li>
+                        <strong>16:00 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Westminster+Bridge+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Westminster Bridge 📍
+                        </a>
+                        & Big Ben
+                        <p class="text-gray-600 ml-5 mt-1">Big Ben & Parliament up close! Photo from left (west) side of bridge. Walk by Westminster Abbey exterior (magnificent Gothic architecture)</p>
+                    </li>
+                    <li>
+                        <strong>17:00 - </strong>Optional: Bus 24 to 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Camden+Town+Camden+High+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Camden Town 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Alternative markets & music scene (40-min ride past Trafalgar, Leicester Sq). Or head back to hotel to recharge!</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🌙 Evening (18:00-21:00)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>18:00 - </strong>Dinner
+                        <p class="text-gray-600 ml-5 mt-1">South Bank Food Market (behind Royal Festival Hall) for international street food, or Camden if you went north (Honest Burgers Camden has GF!), or return to Soho</p>
+                    </li>
+                    <li>
+                        <strong>20:00 - </strong>Pick up GF snacks
+                        <p class="text-gray-600 ml-5 mt-1">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Whole+Foods+Market+20+Glasshouse+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                                Whole Foods 📍
+                            </a>
+                            near Piccadilly, open till 10pm. Great GF brownies, cookies for tomorrow!
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>📱 Phone Safety:</strong> Watch for phone snatchers on bikes at Westminster and Tower Bridge. Stand away from the curb when taking photos - back against building!</p>
+            </div>
+        </div>
+
+        <!-- DAY 3 PAGE -->
+        <div id="day3" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">🛍️ Day 3 - Museums, Shopping & Hidden Gems</h2>
+            
+            <div class="gradient-pink-light p-4 rounded-lg shadow">
+                <p class="text-sm font-semibold text-pink-900">09:00 - 21:00 • Culture, shopping & farewell</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">☀️ Morning (09:00-12:30)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>09:00 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=British+Museum+Great+Russell+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            British Museum 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Free! See Egyptian mummies, Rosetta Stone, Parthenon Marbles. Arrive at 10:00 opening. 60-90 min for highlights. Walk 15-20 min from hotel or take Piccadilly line to Holborn</p>
+                    </li>
+                    <li>
+                        <strong>11:00 - </strong>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Oxford+Street+London+W1" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Oxford Street Shopping 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Europe's busiest shopping street! Pop into <strong>Liberty London</strong>'s Tudor building (near Oxford Circus) - lovely to explore. Primark for cheap fashion. Keep bag in front - pickpocket area!</p>
+                    </li>
+                    <li>
+                        <strong>12:30 - </strong>Lunch
+                        <p class="text-gray-600 ml-5 mt-1">M&S Food Hall for GF sandwiches, or Biscuiteers cafe in Carnaby for GF afternoon tea items (booking recommended)</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">☀️ Afternoon (13:30-17:30)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>13:30 - </strong>Optional: 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Natural+History+Museum+Cromwell+Road+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Natural History Museum 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">Free! Dinosaurs, blue whale model, earthquake simulator. Take Piccadilly line to South Kensington (6 stops, 10 min). 1-1.5 hrs for highlights</p>
+                    </li>
+                    <li>
+                        <strong>15:30 - </strong>Optional: 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Harrods+87-135+Brompton+Road+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Harrods 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">10-min walk from museum. Lavish food halls - free to browse! They have GF pastries (though expensive)</p>
+                    </li>
+                    <li>
+                        <strong>16:30 - </strong>Last Bus Ride (Route 139 to Abbey Road)
+                        <p class="text-gray-600 ml-5 mt-1">From Oxford Circus northbound. Beatles fans: hop off at Abbey Road crossing for the famous photo! Watch for traffic. Or take Route 9/15 again if you prefer</p>
+                    </li>
+                    <li>
+                        <strong>17:30 - </strong>Hotel recharge & pack
+                        <p class="text-gray-600 ml-5 mt-1">Freshen up for farewell evening. Double-check tomorrow's departure plans</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🌙 Evening (18:30-21:00)</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>18:30 - </strong>Farewell Dinner
+                        <p class="text-gray-600 ml-5 mt-1">
+                            Try <a href="https://www.google.com/maps/search/?api=1&query=Nandos+Leicester+Square+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Nando's Leicester Square 📍</a> (peri-peri chicken, many GF options), 
+                            or <a href="https://www.google.com/maps/search/?api=1&query=Honest+Burgers+Camden+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Honest Burgers 📍</a> if at Camden. ~£10-15
+                        </p>
+                    </li>
+                    <li>
+                        <strong>20:00 - </strong>Dessert in 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Covent+Garden+Market+WC2E+8RF+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">
+                            Covent Garden 📍
+                        </a>
+                        <p class="text-gray-600 ml-5 mt-1">One last stroll! Try Grom Gelato again or explore. Walk back through illuminated West End feeling like locals!</p>
+                    </li>
+                    <li>
+                        <strong>20:45 - </strong>Back to Zedwell & Prep
+                        <p class="text-gray-600 ml-5 mt-1">Return to hotel by 9pm. Double-check departure plans. Cherish your London memories! 🎉</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>💡 Tip:</strong> By Day 3, you'll navigate like locals! Oxford Street gets very crowded - keep bags in front and watch for pickpockets.</p>
+            </div>
+        </div>
+
+        <!-- DINING PAGE -->
+        <div id="dining" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">🍽️ Gluten-Free Dining Guide</h2>
+            
+            <div class="gradient-pink-light p-4 rounded-lg shadow">
+                <p class="text-sm font-semibold text-pink-900 mb-2">London is excellent for gluten-free dining! Here are your safest bets:</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🌟 Top GF-Friendly Chains</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Honest+Burgers+Soho+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Honest Burgers 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">GF buns, chips, even onion rings! Coeliac UK accredited. Multiple locations. ~£12-15</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Pho+Covent+Garden+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Pho Vietnamese 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">95% GF menu! Rice noodles, fresh rolls. Coeliac accredited. ~£10-12</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Nandos+Leicester+Square+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Nando's 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">Peri-peri chicken & GF chips. Ask for dedicated fryer prep. ~£10-15</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Cote+Brasserie+Soho+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Côte Brasserie 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">French bistro with full GF menu. Coeliac UK accredited. ~£15-20</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Pizza+Express+Strand+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Pizza Express 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">GF pizza bases & dough balls. Separate prep areas. ~£12-15</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🏪 Supermarkets for GF Supplies</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Whole+Foods+Market+20+Glasshouse+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Whole Foods Piccadilly 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">3 min walk from hotel! Huge GF selection. Open till 10pm. Best for GF brownies, cookies, snacks</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Tesco+Express+17+Regent+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Tesco Express Regent St 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">2 min walk. Open 06:00-23:00. Basic GF section: bread, snacks, cereal bars</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Marks+Spencer+Simply+Food+Piccadilly+Circus+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">M&S Food Hall 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">Great GF sandwiches & ready meals. "Made Without Wheat" cookies are delicious!</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🎂 100% Gluten-Free Spots</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Grom+Gelato+16+Piccadilly+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Grom Gelato 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">100% GF Italian gelato! All cones are GF. 4 min from hotel. ~£4</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=El+Pollote+Seven+Dials+Market+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">El Pollote (Seven Dials) 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">100% GF fried chicken! Covent Garden food hall. ~£9-12</p>
+                    </li>
+                    <li>
+                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Ma+Ma+Boutique+Bakery+Borough+Market+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Ma Ma Bakery (Borough Market) 📍</a></strong>
+                        <p class="text-gray-600 ml-5 mt-1">100% GF stall. Amazing cakes, breads, pastries. ~£3-5 per item</p>
+                    </li>
+                    <li>
+                        <strong>Free From Bakehouse (Borough Market)</strong>
+                        <p class="text-gray-600 ml-5 mt-1">Dedicated GF stall. Don't miss the Bakewell tarts! Wed-Sat market days</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>⚠️ Cross-Contamination Tips:</strong> Always mention you need gluten-free when ordering. UK chains are generally excellent with allergen protocols. Ask about dedicated fryers for chips/fries!</p>
+            </div>
+        </div>
+
+        <!-- SAFETY PAGE -->
+        <div id="safety" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">🛡️ Safety & Street-Smarts</h2>
+            
+            <div class="bg-red-50 p-4 rounded-lg mb-4 shadow">
+                <p class="text-sm font-semibold">London is generally very safe, but stay alert! Here are the key precautions:</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">📱 Phone Theft Prevention</h3>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    <li><strong>Stand away from the curb</strong> when using your phone - thieves on bikes/mopeds snatch phones</li>
+                    <li><strong>Back against building</strong> when taking photos at Westminster, Tower Bridge, busy streets</li>
+                    <li>Hold phone with <strong>firm grip</strong> - don't dangle it loosely</li>
+                    <li>At cafes, <strong>never leave phone on outer tables</strong> where someone could grab it</li>
+                    <li>In evenings, check directions under shop awnings, then tuck phone away</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">👜 Bag & Belongings Security</h3>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    <li>Use <strong>cross-body bag with zipper</strong>, keep it in front in crowds</li>
+                    <li><strong>Never put wallet/phone in back pocket</strong></li>
+                    <li>On Tube/buses: hold bag on lap or tight by side</li>
+                    <li>In restaurants: <strong>don't hang bag on chair back</strong> - keep strap around leg</li>
+                    <li>Pickpockets work in <strong>teams</strong> - one distracts, one steals. Stay alert!</li>
+                    <li>High-risk areas: Oxford Street, Covent Garden, Leicester Square, Borough Market</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🚨 Emergency Numbers</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong class="text-red-600">999</strong> - Police, Ambulance, Fire (immediate emergency)</p>
+                    <p><strong>101</strong> - Police non-emergency (report theft after the fact)</p>
+                    <p><strong>112</strong> - Works same as 999 (EU standard emergency number)</p>
+                    <p><strong>111</strong> - NHS medical advice (non-emergency health questions)</p>
+                    <p><strong>Text 61016</strong> - British Transport Police (if unsafe on public transport)</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">⚠️ Common Scams to Avoid</h3>
+                <ul class="space-y-3 text-sm">
+                    <li>
+                        <strong>Charity Petition Scam:</strong>
+                        <p class="text-gray-600 ml-5">People with clipboards ask you to sign "petition," then aggressively demand donation. While distracted, accomplice may pickpocket. <strong>Solution: Don't stop! Say "No, thank you" and keep walking.</strong></p>
+                    </li>
+                    <li>
+                        <strong>Friendship Bracelet Scam:</strong>
+                        <p class="text-gray-600 ml-5">Someone ties string bracelet on your wrist then demands £10-20. <strong>Don't let anyone grab your hand! If they tie something, refuse to pay, remove it, walk away.</strong></p>
+                    </li>
+                    <li>
+                        <strong>Shell Game / Cups & Balls:</strong>
+                        <p class="text-gray-600 ml-5">Seen on Westminster Bridge. You cannot win - it's rigged! While you watch, pickpockets work the crowd. <strong>Don't stop to watch street gambling.</strong></p>
+                    </li>
+                    <li>
+                        <strong>Photo Characters:</strong>
+                        <p class="text-gray-600 ml-5">People in costumes (Mickey Mouse, etc.) offer photos then demand £5-10 tip. <strong>Only pose if you're willing to pay!</strong></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🌙 Night Safety</h3>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    <li>Soho/Piccadilly are <strong>busy and safe till 11pm</strong> - theatre crowds, diners</li>
+                    <li>Stick to <strong>main, well-lit streets</strong> - Shaftesbury Ave, Regent St, Leicester Sq</li>
+                    <li>Avoid quiet alleyways, especially Walker's Court area</li>
+                    <li>Ignore club promoters offering "free drinks" - skip with minor in group</li>
+                    <li><strong>Stay together</strong> at all times after dark</li>
+                    <li>If anyone harasses you, walk into nearest shop/restaurant for help</li>
+                </ul>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>👮 Trust Your Gut:</strong> If something feels off, remove yourselves. London has CCTV everywhere and police patrol tourist areas. You can approach any shop staff or police officer for help. <strong>You'll likely have zero incidents - just stay aware!</strong></p>
+            </div>
+        </div>
+
+        <!-- TRANSPORT PAGE -->
+        <div id="transport" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">🚇 Transport Guide</h2>
+            
+            <div class="gradient-pink-light p-4 rounded-lg mb-4 shadow">
+                <p class="text-sm font-semibold text-pink-900">London transport is easy once you know the basics! Use contactless cards and you're set.</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">💳 Contactless Payment & Caps</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><strong>Daily Cap: £8.90</strong> for zones 1-2 (unlimited Tube & bus rides!)</li>
+                    <li><strong>Bus-Only Cap: £5.25</strong> per day</li>
+                    <li><strong>Single Bus Fare: £1.75</strong> (tap in only, no tap out)</li>
+                    <li><strong>Hopper Fare:</strong> Unlimited buses within 1 hour = £1.75 total</li>
+                    <li>Use ONE card per person - tap in/out on Tube, tap in only on buses</li>
+                    <li>No cash accepted on buses - must use contactless card/phone</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🚇 Tube (Underground) Basics</h3>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    <li><strong>Always tap in AND out</strong> at yellow readers (forget = max fare charged)</li>
+                    <li>Follow color-coded signs for your line (Piccadilly = dark blue, Bakerloo = brown)</li>
+                    <li>Direction shown by terminus station (e.g. "towards Heathrow")</li>
+                    <li><strong>Mind the gap!</strong> Some platforms have large gaps between train and platform</li>
+                    <li>Let passengers off first before boarding</li>
+                    <li><strong>Stand right on escalators</strong>, walk left - strict London rule!</li>
+                    <li>Peak hours (Mon-Fri 6:30-9:30am & 4-7pm) get very crowded</li>
+                    <li>Last trains around midnight; Night Tube runs Fri/Sat on some lines</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🚌 Bus Tips</h3>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    <li>Wave/flag your bus as it approaches the stop</li>
+                    <li><strong>Enter front door</strong>, tap card at yellow reader</li>
+                    <li>Press red "Stop" button one block before your destination</li>
+                    <li><strong>Exit via middle door</strong> (don't tap out!)</li>
+                    <li>Sit <strong>upstairs front</strong> for best sightseeing views</li>
+                    <li>Buses announce stops - listen for your destination</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🚍 Best Sightseeing Bus Routes</h3>
+                <div class="space-y-3 text-sm">
+                    <p><strong>Route 15</strong> - Trafalgar → Tower of London (via St Paul's) - £1.75, every 10 min</p>
+                    <p><strong>Route 24</strong> - Westminster → Camden (via Trafalgar, Leicester Sq) - £1.75, 24-hour service</p>
+                    <p><strong>Route 9</strong> - Trafalgar → Royal Albert Hall (via Piccadilly, Hyde Park) - £1.75, every 8 min</p>
+                    <p><strong>Route 139</strong> - Westminster → Abbey Road (via Oxford Circus) - £1.75, Beatles crossing!</p>
+                    <p class="italic text-gray-600">These replace expensive tour buses - just £1.75 per ride!</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🗺️ Key Stations Near Hotel</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><strong>Piccadilly Circus</strong> - 1 min walk (Piccadilly & Bakerloo lines)</li>
+                    <li><strong>Leicester Square</strong> - 6 min walk (Piccadilly & Northern lines)</li>
+                    <li><strong>Charing Cross</strong> - 8 min walk (Bakerloo & Northern lines)</li>
+                </ul>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded shadow">
+                <p class="text-sm"><strong>💡 Pro Tip:</strong> Download Citymapper app for journey planning. Works offline with saved routes. For anything under 10 min walk, skip the Tube - you'll see more on foot!</p>
+            </div>
+        </div>
+
+        <!-- APPENDIX PAGE -->
+        <div id="appendix" class="page space-y-4">
+            <button onclick="showPage('home')" class="text-pink-600 hover:text-pink-700 font-medium mb-4">← Back to Home</button>
+            
+            <h2 class="text-2xl font-bold">📋 Appendices & Quick Reference</h2>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">📍 Essential Addresses</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Your Hotel:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Zedwell+Piccadilly+Circus+Great+Windmill+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Zedwell Piccadilly Circus, Great Windmill St 📍</a></p>
+                    <p><strong>Nearest Police:</strong> Charing Cross Police Station, Agar Street</p>
+                    <p><strong>Late Pharmacy:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Boots+44+Regent+Street+London" target="_blank" class="text-pink-600 hover:text-pink-700 underline">Boots Piccadilly, 44-46 Regent St 📍</a> (open till 11pm)</p>
+                    <p><strong>Croatian Embassy:</strong> <a href="https://www.google.com/maps/search/?api=1&query=21+Conway+Street+London+W1T+6BN" target="_blank" class="text-pink-600 hover:text-pink-700 underline">21 Conway St, W1T 6BN 📍</a></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">✅ Packing Checklist</h3>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div>
+                        <p class="font-semibold mb-1">Documents:</p>
+                        <ul class="list-disc ml-5 text-gray-700">
+                            <li>Passports + copies</li>
+                            <li>Travel insurance</li>
+                            <li>Hotel confirmation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-1">Money:</p>
+                        <ul class="list-disc ml-5 text-gray-700">
+                            <li>Contactless cards (2x)</li>
+                            <li>£50 cash (mixed notes)</li>
+                            <li>Backup card (separate)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-1">Tech:</p>
+                        <ul class="list-disc ml-5 text-gray-700">
+                            <li>Phones + chargers</li>
+                            <li>UK adapters (Type G)</li>
+                            <li>Power bank</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-1">Weather Gear:</p>
+                        <ul class="list-disc ml-5 text-gray-700">
+                            <li>Waterproof jacket</li>
+                            <li>Umbrella</li>
+                            <li>Layers & sweater</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🎒 Day Pack Essentials</h3>
+                <ul class="list-disc ml-5 space-y-1 text-sm text-gray-700">
+                    <li>Refillable water bottle</li>
+                    <li>GF snacks (nuts, bars)</li>
+                    <li>Mini umbrella</li>
+                    <li>Hand sanitizer & tissues</li>
+                    <li>Plasters (band-aids)</li>
+                    <li>Emergency contact list (written!)</li>
+                    <li>Phone charger/power bank</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">💰 Budget Estimate (per person)</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Transport:</strong> £8.90/day × 3 = £26.70</p>
+                    <p><strong>Food:</strong> £30-40/day (with supermarket snacks & mid-range dining)</p>
+                    <p><strong>Attractions:</strong> £0-70 (free museums or paid like Tower £36)</p>
+                    <p><strong>Total estimate: £150-250 for 3 days</strong> (excluding accommodation)</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">📱 Useful Apps</h3>
+                <ul class="list-disc ml-5 space-y-1 text-sm text-gray-700">
+                    <li><strong>Citymapper</strong> - Best for London transport planning</li>
+                    <li><strong>Google Maps</strong> - Download offline maps</li>
+                    <li><strong>Find Me Gluten Free</strong> - Restaurant reviews</li>
+                    <li><strong>TfL Go</strong> - Live Tube/bus updates</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold text-lg mb-2">🗓️ Quick Daily Schedule</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Day 1:</strong> West End & Royal London (Trafalgar → Buckingham → Covent Garden)</p>
+                    <p><strong>Day 2:</strong> Tower & Thames Walk (Bus 15 → Tower → Borough → Westminster)</p>
+                    <p><strong>Day 3:</strong> Museums & Shopping (British Museum → Oxford St → Optional Camden)</p>
+                </div>
+            </div>
+
+            <div class="gradient-pink-light p-6 rounded-lg text-center shadow">
+                <h3 class="text-xl font-bold mb-2 text-pink-900">🎉 Have an Amazing Trip!</h3>
+                <p class="text-sm text-pink-800">You're prepared for a fantastic London adventure. Stay safe, eat well, and make incredible memories! 🇬🇧</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Close menu after navigation
+            document.getElementById('menu').classList.add('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
